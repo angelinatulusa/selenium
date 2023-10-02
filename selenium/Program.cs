@@ -24,20 +24,20 @@ class Program
             {
                 System.Threading.Thread.Sleep(1000);
                 button.Click();
-                IWebElement successMessage = null;
-                try
+
+                // Проверяем, отключена ли кнопка.
+                if (button.GetAttribute("disabled") == "true")
                 {
-                    successMessage = driver.FindElement(By.Id("success-message"));
-                }
-                catch (NoSuchElementException)
-                {
+                    Console.WriteLine($"Button with ID {button.GetAttribute("btn")} is disabled.");
                     allbuttons = false;
                 }
 
-                if (successMessage != null && successMessage.Displayed)
+                IWebElement successMessage = null;
+                try
                 {
+                    successMessage = driver.FindElement(By.Id("btn"));
                 }
-                else
+                catch (NoSuchElementException)
                 {
                     allbuttons = false;
                 }
